@@ -6,7 +6,7 @@ namespace KeToanCongNoPhaiThu.Models
     public class ThanhToan
     {
         [Key]
-        public int MaTT { get; set; }
+        public string MaTT { get; set; }
 
         public DateTime NgayThanhToan { get; set; }
         public string NoiDung { get; set; }
@@ -14,7 +14,7 @@ namespace KeToanCongNoPhaiThu.Models
         public string NguoiGhiNhan { get; set; }
 
         [ForeignKey("HoaDon")]
-        public int MaHD { get; set; }
+        public string MaHD { get; set; }
         public HoaDon HoaDon { get; set; }
     }
 }

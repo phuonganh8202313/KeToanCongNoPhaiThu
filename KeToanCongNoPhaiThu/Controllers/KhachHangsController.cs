@@ -35,6 +35,14 @@ namespace KeToanCongNoPhaiThu.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Kiểm tra trùng Mã KH
+                var exist = _context.KhachHangs.Any(k => k.MaKH == khachHang.MaKH);
+                if (exist)
+                {
+                    ModelState.AddModelError("MaKH", "Mã khách hàng đã tồn tại");
+                    return View(khachHang);
+                }
+
                 _context.KhachHangs.Add(khachHang);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -43,7 +51,7 @@ namespace KeToanCongNoPhaiThu.Controllers
         }
 
         // GET: KhachHangs/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var kh = _context.KhachHangs.Find(id);
             if (kh == null) return NotFound();
@@ -65,7 +73,7 @@ namespace KeToanCongNoPhaiThu.Controllers
         }
 
         // GET: KhachHangs/Delete/5
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var kh = _context.KhachHangs.Find(id);
             if (kh == null) return NotFound();
@@ -75,7 +83,7 @@ namespace KeToanCongNoPhaiThu.Controllers
         // POST: KhachHangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(string id)
         {
             var kh = _context.KhachHangs.Find(id);
             if (kh != null)
@@ -87,7 +95,7 @@ namespace KeToanCongNoPhaiThu.Controllers
         }
 
         // GET: KhachHangs/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var kh = _context.KhachHangs.FirstOrDefault(x => x.MaKH == id);
             if (kh == null) return NotFound();
