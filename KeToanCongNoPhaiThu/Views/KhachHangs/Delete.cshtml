@@ -1,0 +1,14 @@
+﻿@model KeToanCongNoPhaiThu.Models.KhachHang
+
+<h2>Xóa Khách Hàng</h2>
+
+<h3>Bạn có chắc muốn xóa khách hàng này?</h3>
+<div>
+    <strong>@Model.TenKH</strong> - @Model.SDT
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="MaKH" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

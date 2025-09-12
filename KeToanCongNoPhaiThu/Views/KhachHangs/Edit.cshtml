@@ -1,0 +1,25 @@
+﻿@model KeToanCongNoPhaiThu.Models.KhachHang
+
+<h2>Sửa Khách Hàng</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="MaKH" />
+    <div class="form-group">
+        <label>Tên KH</label>
+        <input asp-for="TenKH" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Địa chỉ</label>
+        <input asp-for="DiaChi" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>SĐT</label>
+        <input asp-for="SDT" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
