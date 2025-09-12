@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KeToanCongNoPhaiThu.Migrations
 {
     [DbContext(typeof(ReceivableDbContext))]
-    [Migration("20250911162608_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250912091509_FixKhachHang")]
+    partial class FixKhachHang
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,19 +27,16 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.ChiTietHoaDon", b =>
                 {
-                    b.Property<int>("MaCTHD")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("MaCTHD")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaCTHD"));
-
-                    b.Property<int>("MaHD")
-                        .HasColumnType("int");
+                    b.Property<string>("MaHD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NoiDung")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SoTien")
                         .HasColumnType("decimal(18,2)");
@@ -53,17 +50,15 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.CongNo", b =>
                 {
-                    b.Property<int>("MaCongNo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaCongNo"));
+                    b.Property<string>("MaCongNo")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("HanThanhToan")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MaKH")
-                        .HasColumnType("int");
+                    b.Property<string>("MaKH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("SoTienNo")
                         .HasColumnType("decimal(18,2)");
@@ -81,14 +76,12 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.HoaDon", b =>
                 {
-                    b.Property<int>("MaHD")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("MaHD")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaHD"));
-
-                    b.Property<int>("MaKH")
-                        .HasColumnType("int");
+                    b.Property<string>("MaKH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayLap")
                         .HasColumnType("datetime2");
@@ -109,11 +102,8 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.KhachHang", b =>
                 {
-                    b.Property<int>("MaKH")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaKH"));
+                    b.Property<string>("MaKH")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DiaChi")
                         .IsRequired()
@@ -127,8 +117,8 @@ namespace KeToanCongNoPhaiThu.Migrations
 
                     b.Property<string>("SDT")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("TenKH")
                         .IsRequired()
@@ -142,11 +132,8 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.NguoiDung", b =>
                 {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MatKhau")
                         .IsRequired()
@@ -170,14 +157,12 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.ThanhToan", b =>
                 {
-                    b.Property<int>("MaTT")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("MaTT")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTT"));
-
-                    b.Property<int>("MaHD")
-                        .HasColumnType("int");
+                    b.Property<string>("MaHD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayThanhToan")
                         .HasColumnType("datetime2");
@@ -202,14 +187,12 @@ namespace KeToanCongNoPhaiThu.Migrations
 
             modelBuilder.Entity("KeToanCongNoPhaiThu.Models.ThongBao", b =>
                 {
-                    b.Property<int>("MaTB")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("MaTB")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTB"));
-
-                    b.Property<int>("MaKH")
-                        .HasColumnType("int");
+                    b.Property<string>("MaKH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayGui")
                         .HasColumnType("datetime2");

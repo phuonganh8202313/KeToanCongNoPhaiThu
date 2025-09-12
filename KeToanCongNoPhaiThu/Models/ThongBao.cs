@@ -6,13 +6,13 @@ namespace KeToanCongNoPhaiThu.Models
     public class ThongBao
     {
         [Key]
-        public int MaTB { get; set; }
+        public string MaTB { get; set; }
 
         public string NoiDung { get; set; }
         public DateTime NgayGui { get; set; }
 
         [ForeignKey("KhachHang")]
-        public int MaKH { get; set; }
+        public string MaKH { get; set; }
         public KhachHang KhachHang { get; set; }
     }
 }

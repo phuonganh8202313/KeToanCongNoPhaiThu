@@ -5,7 +5,7 @@ namespace KeToanCongNoPhaiThu.Models
     public class NguoiDung
     {
         [Key]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         [Required, MaxLength(50)]
         public string TenDangNhap { get; set; }

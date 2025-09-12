@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KeToanCongNoPhaiThu.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class FixKhachHang : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,10 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "KhachHangs",
                 columns: table => new
                 {
-                    MaKH = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaKH = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TenKH = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    SDT = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    SDT = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -31,8 +30,7 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "NguoiDungs",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TenDangNhap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MatKhau = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     VaiTro = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
@@ -46,12 +44,11 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "CongNos",
                 columns: table => new
                 {
-                    MaCongNo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaCongNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SoTienNo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     HanThanhToan = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaKH = table.Column<int>(type: "int", nullable: false)
+                    MaKH = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,12 +65,11 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "HoaDons",
                 columns: table => new
                 {
-                    MaHD = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaHD = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NgayLap = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TongTien = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaKH = table.Column<int>(type: "int", nullable: false)
+                    MaKH = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,11 +86,10 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "ThongBaos",
                 columns: table => new
                 {
-                    MaTB = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaTB = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayGui = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaKH = table.Column<int>(type: "int", nullable: false)
+                    MaKH = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,10 +106,9 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "ChiTietHoaDons",
                 columns: table => new
                 {
-                    MaCTHD = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaHD = table.Column<int>(type: "int", nullable: false),
-                    NoiDung = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    MaCTHD = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaHD = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoTien = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -132,13 +126,12 @@ namespace KeToanCongNoPhaiThu.Migrations
                 name: "ThanhToans",
                 columns: table => new
                 {
-                    MaTT = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaTT = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NgayThanhToan = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoTienThanhToan = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     NguoiGhiNhan = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaHD = table.Column<int>(type: "int", nullable: false)
+                    MaHD = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
