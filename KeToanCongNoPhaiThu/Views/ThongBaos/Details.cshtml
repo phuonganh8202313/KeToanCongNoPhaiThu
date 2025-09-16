@@ -1,0 +1,28 @@
+﻿@model KeToanCongNoPhaiThu.Models.ThongBao
+
+@{
+    ViewData["Title"] = "Chi tiết Thông Báo";
+}
+
+<h2>Chi tiết Thông Báo</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã Thông Báo</dt>
+        <dd class="col-sm-9">@Model.MaTB</dd>
+
+        <dt class="col-sm-3">Khách Hàng</dt>
+        <dd class="col-sm-9">@Model.KhachHang?.TenKH</dd>
+
+        <dt class="col-sm-3">Nội dung</dt>
+        <dd class="col-sm-9">@Model.NoiDung</dd>
+
+        <dt class="col-sm-3">Ngày gửi</dt>
+        <dd class="col-sm-9">@Model.NgayGui.ToString("dd/MM/yyyy")</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaTB" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

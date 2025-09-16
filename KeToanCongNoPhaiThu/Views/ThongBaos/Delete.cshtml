@@ -1,0 +1,30 @@
+﻿@model KeToanCongNoPhaiThu.Models.ThongBao
+
+@{
+    ViewData["Title"] = "Xóa Thông Báo";
+}
+
+<h2>Xóa Thông Báo</h2>
+
+<h4>Bạn có chắc chắn muốn xóa bản ghi này?</h4>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã Thông Báo</dt>
+        <dd class="col-sm-9">@Model.MaTB</dd>
+
+        <dt class="col-sm-3">Khách Hàng</dt>
+        <dd class="col-sm-9">@Model.KhachHang?.TenKH</dd>
+
+        <dt class="col-sm-3">Nội dung</dt>
+        <dd class="col-sm-9">@Model.NoiDung</dd>
+
+        <dt class="col-sm-3">Ngày gửi</dt>
+        <dd class="col-sm-9">@Model.NgayGui.ToString("dd/MM/yyyy")</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="MaTB" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

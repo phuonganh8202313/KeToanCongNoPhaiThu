@@ -1,11 +1,13 @@
 ﻿using KeToanCongNoPhaiThu.Data;
 using KeToanCongNoPhaiThu.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace KeToanCongNoPhaiThu.Controllers
 {
+    [Authorize(Roles = "Kế Toán,Giám đốc")]
     public class KhachHangsController : Controller
     {
         private readonly ReceivableDbContext _context;

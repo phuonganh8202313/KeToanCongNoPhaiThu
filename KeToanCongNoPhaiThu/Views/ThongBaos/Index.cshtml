@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KeToanCongNoPhaiThu.Models.ThongBao>
+
+@{
+    ViewData["Title"] = "Danh sách Thông Báo";
+}
+
+<h2>Danh sách Thông Báo</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Thêm Thông Báo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã TB</th>
+            <th>Khách Hàng</th>
+            <th>Nội dung</th>
+            <th>Ngày gửi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaTB</td>
+                <td>@item.KhachHang?.TenKH</td>
+                <td>@item.NoiDung</td>
+                <td>@item.NgayGui.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaTB" class="btn btn-sm btn-warning">Sửa</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaTB" class="btn btn-sm btn-info">Chi tiết</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaTB" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

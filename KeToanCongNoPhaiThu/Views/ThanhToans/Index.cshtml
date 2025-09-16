@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KeToanCongNoPhaiThu.Models.ThanhToan>
+
+@{
+    ViewData["Title"] = "Danh sách Thanh Toán";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm Thanh Toán</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã TT</th>
+            <th>Hóa Đơn</th>
+            <th>Ngày Thanh Toán</th>
+            <th>Số tiền</th>
+            <th>Người ghi nhận</th>
+            <th>Hình thức</th>
+            <th>Ngân hàng</th>
+            <th>Tài khoản</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaTT</td>
+                <td>@item.HoaDon?.MaHD</td>
+                <td>@item.NgayThanhToan.ToString("dd/MM/yyyy")</td>
+                <td>@item.SoTienThanhToan.ToString("N0")</td>
+                <td>@item.NhanVien?.TenNV</td>
+                <td>@item.HinhThuc</td>
+                <td>@(item.HinhThuc == "Chuyển khoản" ? item.NganHangNhan : "")</td>
+                <td>@(item.HinhThuc == "Chuyển khoản" ? item.TaiKhoanNhan : "")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaTT" class="btn btn-sm btn-warning">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaTT" class="btn btn-sm btn-info">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaTT" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

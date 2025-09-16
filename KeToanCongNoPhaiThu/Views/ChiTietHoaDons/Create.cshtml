@@ -1,0 +1,34 @@
+﻿@model KeToanCongNoPhaiThu.Models.ChiTietHoaDon
+
+@{
+    ViewData["Title"] = "Thêm Chi Tiết Hóa Đơn";
+}
+
+<h2>Thêm Chi Tiết Hóa Đơn</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="MaCTHD" class="control-label">Mã Chi tiết hóa đơn</label>
+        <input asp-for="MaCTHD" class="form-control" />
+        <span asp-validation-for="MaCTHD" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MaHD" class="control-label">Hóa Đơn</label>
+        <select asp-for="MaHD" class="form-control" asp-items="ViewBag.MaHD"></select>
+        <span asp-validation-for="MaHD" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NoiDung" class="control-label">Nội dung chi tiết</label>
+        <input asp-for="NoiDung" class="form-control" />
+        <span asp-validation-for="NoiDung" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SoTien" class="control-label">Số tiền</label>
+        <input asp-for="SoTien" class="form-control" />
+        <span asp-validation-for="SoTien" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <input type="submit" value="Lưu" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+</form>

@@ -1,0 +1,9 @@
+﻿@model List<KeToanCongNoPhaiThu.Models.CongNo>
+
+@if (Model.Any())
+{
+    <div class="alert alert-danger text-center">
+        Có @Model.Count công nợ quá hạn!
+        <a asp-controller="CongNos" asp-action="Index">Xem chi tiết</a>
+    </div>
+}

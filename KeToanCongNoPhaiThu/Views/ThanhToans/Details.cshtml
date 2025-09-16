@@ -1,0 +1,43 @@
+﻿@model KeToanCongNoPhaiThu.Models.ThanhToan
+
+@{
+    ViewData["Title"] = "Chi tiết Thanh Toán";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã Thanh Toán</dt>
+        <dd class="col-sm-9">@Model.MaTT</dd>
+
+        <dt class="col-sm-3">Hóa Đơn</dt>
+        <dd class="col-sm-9">@Model.HoaDon?.MaHD</dd>
+
+        <dt class="col-sm-3">Ngày Thanh Toán</dt>
+        <dd class="col-sm-9">@Model.NgayThanhToan.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Số tiền</dt>
+        <dd class="col-sm-9">@Model.SoTienThanhToan.ToString("N0")</dd>
+
+        <dt class="col-sm-3">Người ghi nhận</dt>
+        <dd class="col-sm-9">@Model.NhanVien?.TenNV</dd>
+
+        <dt class="col-sm-3">Hình thức</dt>
+        <dd class="col-sm-9">@Model.HinhThuc</dd>
+
+        @if (Model.HinhThuc == "Chuyển khoản")
+        {
+            <dt class="col-sm-3">Ngân hàng nhận</dt>
+            <dd class="col-sm-9">@Model.NganHangNhan</dd>
+
+            <dt class="col-sm-3">Tài khoản nhận</dt>
+            <dd class="col-sm-9">@Model.TaiKhoanNhan</dd>
+        }
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.MaTT" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</p>

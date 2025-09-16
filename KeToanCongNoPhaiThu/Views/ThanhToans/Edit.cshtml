@@ -1,0 +1,79 @@
+﻿@model KeToanCongNoPhaiThu.Models.ThanhToan
+
+@{
+    ViewData["Title"] = "Sửa Thanh Toán";
+}
+
+<h2>Sửa Thanh Toán</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="MaTT" />
+
+    <div class="form-group">
+        <label asp-for="MaHD" class="control-label">Hóa Đơn</label>
+        <select asp-for="MaHD" class="form-control" asp-items="ViewBag.MaHD"></select>
+        <span asp-validation-for="MaHD" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NgayThanhToan" class="control-label">Ngày thanh toán</label>
+        <input asp-for="NgayThanhToan" type="date" class="form-control" />
+        <span asp-validation-for="NgayThanhToan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NoiDung" class="control-label">Nội dung</label>
+        <input asp-for="NoiDung" class="form-control" />
+        <span asp-validation-for="NoiDung" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SoTienThanhToan" class="control-label">Số tiền đã thanh toán</label>
+        <input asp-for="SoTienThanhToan" class="form-control" />
+        <span asp-validation-for="SoTienThanhToan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NguoiGhiNhanId" class="control-label">Người ghi nhận</label>
+        <select asp-for="NguoiGhiNhanId" asp-items="ViewBag.NhanVien" class="form-control">
+            <option value="">-- Chọn nhân viên --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HinhThuc" class="control-label"></label>
+        <select asp-for="HinhThuc" class="form-control" id="hinhThuc">
+            <option value="Tiền mặt">Tiền mặt</option>
+            <option value="Chuyển khoản">Chuyển khoản</option>
+        </select>
+    </div>
+
+    <div class="form-group" id="chuyenKhoanFields" style="display:none;">
+        <label asp-for="NganHangNhan" class="control-label"></label>
+        <input asp-for="NganHangNhan" class="form-control" />
+
+        <label asp-for="TaiKhoanNhan" class="control-label"></label>
+        <input asp-for="TaiKhoanNhan" class="form-control" />
+    </div>
+    <div class="form-group mt-2">
+        <input type="submit" value="Cập nhật" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById('hinhThuc').addEventListener('change', function() {
+            var fields = document.getElementById('chuyenKhoanFields');
+            if (this.value === 'Chuyển khoản') fields.style.display = 'block';
+            else fields.style.display = 'none';
+        });
+
+        // hiển thị đúng khi load lại
+        window.addEventListener('load', function() {
+            var evt = new Event('change');
+            document.getElementById('hinhThuc').dispatchEvent(evt);
+        });
+    </script>
+}
+

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KeToanCongNoPhaiThu.Models
@@ -10,7 +11,8 @@ namespace KeToanCongNoPhaiThu.Models
 
         [ForeignKey("HoaDon")]
         public string MaHD { get; set; }
-        public HoaDon HoaDon { get; set; }
+        [ValidateNever]
+        public HoaDon? HoaDon { get; set; }
         public string NoiDung { get; set; }
 
         public decimal SoTien { get; set; }

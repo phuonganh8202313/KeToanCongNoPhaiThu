@@ -1,0 +1,31 @@
+﻿@model KeToanCongNoPhaiThu.Models.CongNo
+
+@{
+    ViewData["Title"] = "Chi tiết Công Nợ";
+}
+
+<h2>Chi tiết Công Nợ</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã Công Nợ</dt>
+        <dd class="col-sm-9">@Model.MaCongNo</dd>
+
+        <dt class="col-sm-3">Khách Hàng</dt>
+        <dd class="col-sm-9">@Model.KhachHang?.TenKH</dd>
+
+        <dt class="col-sm-3">Số Tiền Nợ</dt>
+        <dd class="col-sm-9">@Model.SoTienNo.ToString("N0")</dd>
+
+        <dt class="col-sm-3">Hạn Thanh Toán</dt>
+        <dd class="col-sm-9">@Model.HanThanhToan.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Trạng Thái</dt>
+        <dd class="col-sm-9">@Model.TrangThai</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaCongNo" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

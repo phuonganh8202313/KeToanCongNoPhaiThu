@@ -1,19 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace KeToanCongNoPhaiThu.Models
 {
-    public class NguoiDung
+    public class NguoiDung : IdentityUser
     {
-        [Key]
-        public string UserID { get; set; }
-
-        [Required, MaxLength(50)]
         public string TenDangNhap { get; set; }
-
-        [Required, MaxLength(100)]
-        public string MatKhau { get; set; }
-
-        [Required, MaxLength(20)]
         public string VaiTro { get; set; } // admin, ke toan, giam doc
+        public string HoTen { get; set; }
+        public DateTime? NgaySinh { get; set; }
+        public bool IsApproved { get; set; } = true; // mặc định true, riêng Giám đốc thì set false
     }
 }

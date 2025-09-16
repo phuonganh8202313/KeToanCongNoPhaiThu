@@ -1,0 +1,30 @@
+﻿@model KeToanCongNoPhaiThu.Models.ChiTietHoaDon
+
+@{
+    ViewData["Title"] = "Xóa Chi Tiết Hóa Đơn";
+}
+
+<h2>Xóa Chi Tiết Hóa Đơn</h2>
+
+<h4>Bạn có chắc chắn muốn xóa bản ghi này?</h4>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã CTHĐ</dt>
+        <dd class="col-sm-9">@Model.MaCTHD</dd>
+
+        <dt class="col-sm-3">Hóa Đơn</dt>
+        <dd class="col-sm-9">@Model.HoaDon?.MaHD</dd>
+
+        <dt class="col-sm-3">Nội dung</dt>
+        <dd class="col-sm-9">@Model.NoiDung</dd>
+
+        <dt class="col-sm-3">Số tiền</dt>
+        <dd class="col-sm-9">@Model.SoTien.ToString("N0")</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="MaCTHD" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

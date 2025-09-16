@@ -1,8 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<KeToanCongNoPhaiThu.Models.ThongBao>
+@{
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Chào mừng đến hệ thống Kế toán Công nợ</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Xin chào @User.Identity.Name!</p>
+    <a asp-controller="Home" asp-action="Dashboard" class="btn btn-primary">Đi tới Dashboard</a>
+    <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
+        <button type="submit" class="btn btn-danger">Đăng xuất</button>
+    </form>
+}
+else
+{
+    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-success">Đăng nhập</a>
+}
+
+<h2>Thông báo gần đây</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var tb in Model)
+        {
+            <li class="list-group-item @(tb.DaDoc ? "" : "fw-bold")">
+                <span>@tb.NgayGui.ToString("dd/MM/yyyy HH:mm")</span> -
+                @tb.NoiDung
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Chưa có thông báo nào.</p>
+}

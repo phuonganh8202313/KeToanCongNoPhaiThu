@@ -1,36 +1,104 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject KeToanCongNoPhaiThu.Data.ReceivableDbContext _context
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KeToanCongNoPhaiThu</title>
+    <title>@ViewData["Title"] - Kế Toán Công Nợ Phải Thu</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KeToanCongNoPhaiThu.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KeToanCongNoPhaiThu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Kế Toán Công Nợ Phải Thu</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                @{
+                    var currentPath = Context.Request.Path;
+                    bool isAuthPage = currentPath.StartsWithSegments("/Identity/Account/Login")
+                    || currentPath.StartsWithSegments("/Identity/Account/Register");
+                }
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <!-- Menu chính -->
+                    @if (User.Identity.IsAuthenticated && !isAuthPage)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            @if (User.IsInRole("Kế Toán") || User.IsInRole("Giám đốc"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="HoaDons" asp-action="Index">Hóa đơn</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="KhachHangs" asp-action="Index">Khách hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="CongNos" asp-action="Index">Công nợ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="ThanhToans" asp-action="Index">Thanh toán</a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole("Giám đốc"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="BaoCao" asp-action="TongQuan">Báo cáo</a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="NguoiDungs" asp-action="Index">Người dùng</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+
+                    <!-- Login / Logout -->
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link">Xin chào, @User.Identity.Name!</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Đăng xuất</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
+        <!-- Thông báo công nợ quá hạn (chỉ Giám đốc) -->
+        @if (User.IsInRole("Giám đốc"))
+        {
+            @await Component.InvokeAsync("CongNoQuaHan")
+        }
+
+        <!-- Nội dung trang -->
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -38,9 +106,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - KeToanCongNoPhaiThu - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - KeToanCongNoPhaiThu -
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

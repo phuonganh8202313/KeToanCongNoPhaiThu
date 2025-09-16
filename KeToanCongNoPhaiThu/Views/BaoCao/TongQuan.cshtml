@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Báo cáo tổng quan";
+}
+
+<h2>Báo cáo tổng quan</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white p-3">
+            <h4>Tổng doanh thu</h4>
+            <h3>@ViewBag.TongDoanhThu.ToString("N0") VNĐ</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white p-3">
+            <h4>Tổng thanh toán</h4>
+            <h3>@ViewBag.TongThanhToan.ToString("N0") VNĐ</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-danger text-white p-3">
+            <h4>Tổng công nợ</h4>
+            <h3>@ViewBag.TongNo.ToString("N0") VNĐ</h3>
+        </div>
+    </div>
+</div>

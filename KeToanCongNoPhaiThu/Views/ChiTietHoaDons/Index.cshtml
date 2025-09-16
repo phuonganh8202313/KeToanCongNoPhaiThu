@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KeToanCongNoPhaiThu.Models.ChiTietHoaDon>
+
+@{
+    ViewData["Title"] = "Danh sách Chi Tiết Hóa Đơn";
+}
+
+<h2>Danh sách Chi Tiết Hóa Đơn</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Thêm Chi Tiết</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã CTHĐ</th>
+            <th>Mã Hóa Đơn</th>
+            <th>Nội dung</th>
+            <th>Số tiền</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaCTHD</td>
+                <td>@item.HoaDon?.MaHD</td>
+                <td>@item.NoiDung</td>
+                <td>@item.SoTien.ToString("N0")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaCTHD" class="btn btn-sm btn-warning">Sửa</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaCTHD" class="btn btn-sm btn-info">Chi tiết</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaCTHD" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

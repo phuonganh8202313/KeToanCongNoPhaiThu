@@ -1,0 +1,25 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Công nợ theo khách hàng";
+}
+
+<h2>Công nợ theo khách hàng</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Khách hàng</th>
+            <th>Tổng nợ (VNĐ)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.KhachHang</td>
+                <td>@item.TongNo.ToString("N0")</td>
+            </tr>
+        }
+    </tbody>
+</table>

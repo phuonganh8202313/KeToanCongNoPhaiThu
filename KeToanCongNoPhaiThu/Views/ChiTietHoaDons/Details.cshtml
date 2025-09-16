@@ -1,0 +1,28 @@
+﻿@model KeToanCongNoPhaiThu.Models.ChiTietHoaDon
+
+@{
+    ViewData["Title"] = "Chi tiết Chi Tiết Hóa Đơn";
+}
+
+<h2>Chi tiết Chi Tiết Hóa Đơn</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã CTHĐ</dt>
+        <dd class="col-sm-9">@Model.MaCTHD</dd>
+
+        <dt class="col-sm-3">Hóa Đơn</dt>
+        <dd class="col-sm-9">@Model.HoaDon?.MaHD</dd>
+
+        <dt class="col-sm-3">Nội dung</dt>
+        <dd class="col-sm-9">@Model.NoiDung</dd>
+
+        <dt class="col-sm-3">Số tiền</dt>
+        <dd class="col-sm-9">@Model.SoTien.ToString("N0")</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaCTHD" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

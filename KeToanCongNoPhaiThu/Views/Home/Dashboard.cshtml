@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Bảng điều khiển";
+}
+
+<h2>Bảng điều khiển</h2>
+
+<p>Xin chào, @User.Identity.Name!</p>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>Bạn là <b>Admin</b>. Có thể quản lý người dùng.</p>
+    <a asp-controller="Users" asp-action="Index" class="btn btn-warning">Quản lý người dùng</a>
+}
+
+@if (User.IsInRole("KeToan"))
+{
+    <p>Bạn là <b>Kế toán</b>. Có thể quản lý hóa đơn, công nợ, thanh toán.</p>
+    <a asp-controller="HoaDons" asp-action="Index" class="btn btn-primary">Hóa đơn</a>
+    <a asp-controller="CongNos" asp-action="Index" class="btn btn-primary">Công nợ</a>
+}
+
+@if (User.IsInRole("GiamDoc"))
+{
+    <p>Bạn là <b>Giám đốc</b>. Có thể xem báo cáo tổng quan.</p>
+    <a asp-controller="BaoCao" asp-action="TongQuan" class="btn btn-success">Xem báo cáo</a>
+}

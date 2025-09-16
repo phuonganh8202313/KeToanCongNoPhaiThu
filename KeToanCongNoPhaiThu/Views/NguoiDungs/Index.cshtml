@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KeToanCongNoPhaiThu.Models.NguoiDung>
+
+<h2>Quản lý người dùng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Họ tên</th>
+            <th>Vai trò</th>
+            <th>Email</th>
+            <th>Duyệt</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.HoTen</td>
+                <td>@user.VaiTro</td>
+                <td>
+                    @if ((user.VaiTro == "Giám đốc" || user.VaiTro == "Kế toán") && !user.IsApproved)
+                    {
+                        <form asp-action="Approve" method="post">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
+                        </form>
+                    }
+                    else if (user.IsApproved)
+                    {
+                        <span class="text-success">Đã duyệt</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
